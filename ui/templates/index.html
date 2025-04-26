@@ -1,62 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Iris Predictor</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    input {
-      margin: 5px;
-      padding: 10px;
-      width: 200px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    h1, h2, h3 {
-      color: #333;
-    }
-    h1 {
-      font-size: 24px;
-    }
-    h2 {
-      font-size: 20px;
-    }
-    h3 {
-      font-size: 18px;
-    }
-    #output {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #333;
-    }
-    #output.error {
-      color: red;
-    }
-    #output.success {
-      color: green;
-    }
-    #output.error {
-      color: red;
-    }
-    #output.success {
-      color: green;
-    }
-    #output.error {
-      color: red;
-    }
-  </style>
-</head>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <script src="{{ url_for('static', path='js/script.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="description" content="Iris Flower Species Prediction using Machine Learning">
+    <meta name="keywords" content="Iris, Flower, Species, Prediction, Machine Learning, Flask, Python">
+    <meta name="author" content="Kushal Gaikwad">
+    <title>Iris Predictor</title>
+  </head>
 <body>
+  <img src="{{ url_for('static', path='images/logo.png') }}" alt="Logo" style="width: 10em; height: auto;">
   <h1>Welcome to the Iris Predictor</h1>
   <h2>Enter Iris Flower Features</h2>
   <input id="sepal_length" placeholder="Sepal Length" step="any" type="number">
@@ -65,7 +20,14 @@
   <input id="petal_width" placeholder="Petal Width" step="any" type="number">
   <button onclick="predict()">Predict</button>
   <h3 id="output"></h3>
-
+  
+  <!-- Add video eoo with volume controls-->
+  <div class="video-container" style="position: relative; width: 20%; height: auto; overflow: hidden;">
+    <video autoplay muted loop controls style="width: 100%; height: auto; z-index: 0;">
+      <source src="{{ url_for('static', path='videos/Iris.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
   <script>
     async function predict() {
       const data = {
@@ -74,7 +36,7 @@
         petal_length: parseFloat(document.getElementById("petal_length").value),
         petal_width: parseFloat(document.getElementById("petal_width").value)
       };
-
+      
       const response = await fetch("http://localhost:8080/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

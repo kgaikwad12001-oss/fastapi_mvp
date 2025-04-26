@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from app.api.predict import router as predict_router
 import os
 
@@ -15,15 +16,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount the 'ui' directory to serve static files
-app.mount("/ui", StaticFiles(directory="ui"), name="ui")
+# Mount the 'static' folder
+app.mount("/static", StaticFiles(directory=os.path.join("ui", "static")), name="static")
 
-# Default route to serve index.html
+# Templates folder
+templates = Jinja2Templates(directory=os.path.join("ui", "templates"))
+
+# Serve index.html
 @app.get("/", response_class=HTMLResponse)
-async def read_index():
-    index_path = os.path.join("ui", "index.html")
-    with open(index_path, "r") as f:
-        return f.read()
+async def read_index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # API routes
 app.include_router(predict_router, prefix="/api")

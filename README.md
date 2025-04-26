@@ -97,3 +97,26 @@ The web interface provides input fields for:
 - Petal Width
 
 Enter the measurements and click "Predict" to get the predicted Iris species.
+
+
+
+```
+└── 📁app
+    └── 📁__pycache__
+        └── main.cpython-312.pyc
+    └── 📁api
+        └── 📁__pycache__
+            └── predict.cpython-312.pyc
+        └── predict.py
+    └── 📁model
+        └── 📁__pycache__
+            └── load_model.cpython-312.pyc
+        └── load_model.py
+        └── model.pkl
+        └── train_model.py
+    └── 📁schemas
+        └── 📁__pycache__
+            └── input_schema.cpython-312.pyc
+        └── input_schema.py
+    └── main.py
+```
