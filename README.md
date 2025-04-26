@@ -52,8 +52,11 @@ uvicorn app.main:app --reload
 ```
 
 2. Access the application:
-- Web UI: Open `http://localhost:8000` in your browser
-- API Documentation: Visit `http://localhost:8000/docs`
+- Web UI: Open `http://localhost:8080` in your browser. Depending on which port your application is running, make changes in `fetch()` in 'index.html' and your terminal command 
+
+> `uvicorn app.main:app --reload --port 8080
+`.
+- API Documentation: Visit `http://localhost:8080/docs`
 
 ## API Reference
 

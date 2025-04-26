@@ -4,6 +4,7 @@
   <title>Iris Predictor</title>
 </head>
 <body>
+  <h1>Welcome to the Iris Predictor</h1>
   <h2>Enter Iris Flower Features</h2>
   <input id="sepal_length" placeholder="Sepal Length" step="any" type="number">
   <input id="sepal_width" placeholder="Sepal Width" step="any" type="number">
@@ -21,7 +22,7 @@
         petal_width: parseFloat(document.getElementById("petal_width").value)
       };
 
-      const response = await fetch("http://localhost:8000/api/predict", {
+      const response = await fetch("http://localhost:8080/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
